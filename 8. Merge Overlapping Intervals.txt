@@ -1,0 +1,58 @@
+import java.util.* ;
+import java.io.*; 
+/*******************************************************
+
+    Following is the Interval class structure
+
+    class Interval {
+        int start, int finish;
+
+        Interval(int start, int finish) {
+            this.start = start;
+            this.finish = finish;
+        }
+    }
+    
+*******************************************************/
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+    public static List<Interval> mergeIntervals(Interval[] intervals) {
+        // write your code here.
+        Arrays.sort(intervals, new Comparator<Interval>() {
+            public int compare(Interval i1, Interval i2) {
+                return i1.start - i2.start;
+            }
+        });
+
+        ArrayList<Interval> ans = new ArrayList();
+
+        for (Interval interval : intervals) {
+            if(ans.size() == 0) {
+                ans.add(interval);
+                continue;
+            }
+
+            if(isOverlapping(interval, ans.get(ans.size()-1))) {
+                merge(interval, ans);
+                continue;
+            }
+
+            ans.add(interval);
+        }
+        return ans;
+    }
+    static boolean isOverlapping(Interval current, Interval combined) {
+        if(current.start <= combined.finish) {
+            return true;
+        }
+        return false;
+    }
+    static void merge(Interval interval, ArrayList<Interval> ans) {
+        Interval bigInterval = ans.get(ans.size()-1);
+        Interval newInterval = new Interval(bigInterval.start, Math.max(interval.finish, bigInterval.finish));
+        ans.set(ans.size()-1, newInterval);
+    }
+}
