@@ -1,0 +1,29 @@
+import java.io.*;
+import java.util.* ;
+
+public class Solution {
+	public static int findMajority(int[] arr, int n) {
+		// Write your code here.
+		//Moore's voting algo
+		int count = 0; 
+        int element = 0; 
+
+        for (int i = 0; i < n; i++) {
+            if (count == 0) {
+                count = 1;
+                element = arr[i];
+            } 
+			else if (element == arr[i]) count++;
+            else count--;
+        }
+        
+        int ck = 0;
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == element) ck++;
+        }
+
+        if (ck > (n / 2)) return element;
+        return -1;
+		
+	}
+}

@@ -1,0 +1,42 @@
+import java.io.*;
+import java.util.* ;
+
+import java.util.HashMap;
+
+public class Solution 
+{
+    public static ArrayList<Integer> majorityElementII(ArrayList<Integer> arr){
+        // Write your code here.
+        int n = arr.size();
+        ArrayList<Integer> ans = new ArrayList<>();
+        int cnt1=0, cnt2=0,el1= Integer.MAX_VALUE,el2=Integer.MIN_VALUE;
+        for (int i = 0; i < n; i++) {
+            if(cnt1==0 && el2 !=arr.get(i)){
+                cnt1=1;
+                el1 = arr.get(i);
+            }
+            else if(cnt2 == 0 && el1 != arr.get(i)){
+                cnt2=1;
+                el2 = arr.get(i);
+            }
+            else if(el1 == arr.get(i)) cnt1++;
+            else if(el2 == arr.get(i)) cnt2++;
+            else{
+                cnt1--;
+                cnt2--;
+            }
+        }
+        cnt1=0;cnt2=0;
+        for(int i=0; i<arr.size(); i++){
+            if(el1 == arr.get(i)) cnt1++;
+            if(el2 == arr.get(i)) cnt2++;
+        }
+        
+        int min = (n/3)+1;
+        if(cnt1 >= min) ans.add(el1);
+        if(cnt2 >= min) ans.add(el2);
+        return ans;
+        
+    }
+    
+}
