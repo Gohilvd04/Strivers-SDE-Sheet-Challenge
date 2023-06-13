@@ -1,0 +1,39 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution 
+{
+	public static int uniqueSubstrings(String input) {
+		
+		// if(input.length()==0)
+        //     return 0;
+
+        // int ans = Integer.MIN_VALUE;
+		
+        // for (int i = 0; i < input.length(); i++){
+
+        //     Set < Character > set = new HashSet < > ();
+        //     for (int j = i; j < input.length(); j++){
+        //         if (set.contains(input.charAt(j))){
+        //             ans = Math.max(ans, j - i);
+        //             break;
+        //         }
+        //         set.add(input.charAt(j));
+        //     }
+        // }
+        // return ans;
+		HashMap < Character, Integer > mpp = new HashMap < Character, Integer > ();
+
+        int left = 0, right = 0;
+        int n = input.length();
+        int len = 0;
+        while (right < n) {
+            if (mpp.containsKey(input.charAt(right))) left = Math.max(mpp.get(input.charAt(right)) + 1, left);
+
+            mpp.put(input.charAt(right), right);
+
+            len = Math.max(len, right - left + 1);
+            right++;
+        }
+        return len;
+	}
+}

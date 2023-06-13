@@ -1,0 +1,25 @@
+import java.io.*;
+import java.util.* ;
+import java.util.Arrays;
+public class Solution{
+    public static List<int[]> pairSum(int[] arr, int s) {
+        // Write your code here.
+
+        List<int []> ans = new ArrayList<>();
+        Arrays.sort(arr);
+
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[i] + arr[j] == s) {
+                    int temp[] = new int[2];
+                    temp[0] = arr[i];
+                    temp[1] = arr[j];
+                    ans.add(temp);
+                }
+            }
+        }
+        
+        return ans;
+
+    }
+}
