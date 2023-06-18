@@ -1,0 +1,9 @@
+import java.util.HashSet;
+import java.util.*;
+public class Solution {
+	public static int removeDuplicates(ArrayList<Integer> arr,int n) {
+		// Write your code here.
+		HashSet<Integer> ans = new HashSet<>(arr);
+		return ans.size();
+	}
+}
